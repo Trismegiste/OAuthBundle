@@ -56,7 +56,7 @@ hwi_oauth:
             type:                github
             client_id:           51a83ff9f1216abd83ee
             client_secret:       36a8f497751ba31321ad47fbba68fc42eb24bf8e
-            scope: ""
+            scope: "user"
     http_client:
         verify_peer:   true
         ignore_errors: false

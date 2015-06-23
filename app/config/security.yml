@@ -6,12 +6,9 @@ security:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-    providers:
-        hardcoded:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: toto, roles: [ 'ROLE_ADMIN' ] }
+    providers: 
+        utini:
+            id: proprietary.oauth.user_provider
 
     firewalls:
         dev:
@@ -33,4 +30,5 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    #    - { path: ^/, roles: ROLE_USER }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

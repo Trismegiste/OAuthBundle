@@ -12,3 +12,4 @@ trismegiste_front:
 
 github_login:
     path: /login/check_github
+    
