@@ -1,9 +1,14 @@
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+    
 trismegiste_front:
     resource: "@TrismegisteFrontBundle/Resources/config/routing.xml"
     prefix:   /
 
-trismegiste_logincheck:
-    pattern: /admin/login_check
-
-trismegiste_logout:
-    pattern: /logout
+github_login:
+    path: /login/check_github

@@ -10,6 +10,7 @@ class AppKernel extends Kernel
         return [
             new Trismegiste\FrontBundle\TrismegisteFrontBundle(),
             new Trismegiste\DokudokiBundle\TrismegisteDokudokiBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         ];
     }
 

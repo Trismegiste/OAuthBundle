@@ -14,6 +14,9 @@
         <service id="oauth.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
             <argument type="service" id="router"/>
         </service>
+        
+        <service id="proprietary.oauth.user_provider" class="HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider">
+        </service>
     </services>
 
 </container>

@@ -47,3 +47,17 @@ dokudoki:
     server: %mongodb_server%
     database: Sf2ffbp
     collection: boilerplate
+
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: secured_area
+    resource_owners:
+        my_github:
+            type:                github
+            client_id:           51a83ff9f1216abd83ee
+            client_secret:       36a8f497751ba31321ad47fbba68fc42eb24bf8e
+            scope: ""
+    http_client:
+        verify_peer:   true
+        ignore_errors: false
+    target_path_parameter: /admin/dashboard

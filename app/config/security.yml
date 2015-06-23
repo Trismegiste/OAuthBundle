@@ -19,18 +19,18 @@ security:
             security: false
 
         secured_area:
-            pattern:    ^/
-            provider: hardcoded
-            stateless: false
-            form_login:
-                default_target_path: admin_secured
-                check_path: trismegiste_logincheck
-                login_path: /
-            logout:
-                path:   /logout
-                target: /
+            pattern: ^/
             anonymous: ~
+            oauth:
+                resource_owners:
+                    my_github:     /login/check_github
+                login_path:        /login
+                use_forward:       false
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: proprietary.oauth.user_provider
 
     access_control:
-        - { path: ^/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    #    - { path: ^/, roles: ROLE_USER }
