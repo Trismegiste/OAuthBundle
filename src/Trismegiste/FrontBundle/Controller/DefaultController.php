@@ -33,4 +33,9 @@ class DefaultController extends Template
         return new RedirectResponse($authUrl);
     }
 
+    public function adminAction()
+    {
+        return $this->render('TrismegisteFrontBundle:Default:admin.html.twig');
+    }
+
 }

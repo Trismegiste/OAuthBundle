@@ -22,6 +22,7 @@ security:
             pattern:    ^/
             provider: hardcoded
             form_login:
+                default_target_path: admin_secured
                 check_path: /login_check
                 login_path: /
             logout:

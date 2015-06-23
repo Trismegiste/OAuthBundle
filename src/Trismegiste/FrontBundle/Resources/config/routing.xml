@@ -15,4 +15,8 @@
     <route id="connect_with" pattern="/connect/{provider}">
         <default key="_controller">TrismegisteFrontBundle:Default:connectWith</default>
     </route>
+    
+    <route id="admin_secure" pattern="/admin/dashboard">
+        <default key="_controller">TrismegisteFrontBundle:Default:admin</default>
+    </route>
 </routes>
