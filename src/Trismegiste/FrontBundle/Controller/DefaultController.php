@@ -22,11 +22,15 @@ class DefaultController extends Template
         return array('About' => 'trismegiste_about');
     }
 
-    public function connectWith($provider)
+    public function connectWithAction($provider)
     {
         $factory = $this->get('oauth.provider.factory');
+        $provider = $factory->create('github');
+        // If we don't have an authorization code then get one
+        $authUrl = $provider->getAuthorizationUrl();
+        $this->get('session')->set('oauth2state', $provider->state);
 
-        return new RedirectResponse();
+        return new RedirectResponse($authUrl);
     }
 
 }

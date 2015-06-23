@@ -13,6 +13,6 @@
     </route>
     
     <route id="connect_with" pattern="/connect/{provider}">
-        <default key="_controller">TrismegisteFrontBundle:Default:index</default>
+        <default key="_controller">TrismegisteFrontBundle:Default:connectWith</default>
     </route>
 </routes>

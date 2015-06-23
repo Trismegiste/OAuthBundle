@@ -11,7 +11,8 @@
     -->
 
     <services>
-        <service id="oauth2.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
+        <service id="oauth.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
+            <argument type="service" id="router"/>
         </service>
     </services>
 
