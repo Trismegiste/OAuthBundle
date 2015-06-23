@@ -21,9 +21,10 @@ security:
         secured_area:
             pattern:    ^/
             provider: hardcoded
+            stateless: false
             form_login:
                 default_target_path: admin_secured
-                check_path: /login_check
+                check_path: trismegiste_logincheck
                 login_path: /
             logout:
                 path:   /logout

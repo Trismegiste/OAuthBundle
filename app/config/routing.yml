@@ -3,7 +3,7 @@ trismegiste_front:
     prefix:   /
 
 trismegiste_logincheck:
-    pattern: /login_check
+    pattern: /admin/login_check
 
 trismegiste_logout:
     pattern: /logout
