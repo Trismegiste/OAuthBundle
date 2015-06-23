@@ -1,0 +1,1 @@
+# Test oauth with symfony firewall
