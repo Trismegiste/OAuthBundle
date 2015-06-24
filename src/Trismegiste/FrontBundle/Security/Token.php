@@ -6,6 +6,7 @@
 
 namespace Trismegiste\FrontBundle\Security;
 
+use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**
@@ -14,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 class Token extends AbstractToken
 {
 
-    /** @var \League\OAuth2\Client\Token\AccessToken */
+    /** @var AccessToken */
     private $accessToken;
 
     /** @var string */
@@ -23,7 +24,7 @@ class Token extends AbstractToken
     /** @var array */
     private $userInfo;
 
-    public function __construct($providerKey, \League\OAuth2\Client\Token\AccessToken $accessToken, array $role = [])
+    public function __construct($providerKey, AccessToken $accessToken, array $role = [])
     {
         parent::__construct($role);
         $this->setAuthenticated(count($role) > 0);
@@ -33,7 +34,7 @@ class Token extends AbstractToken
 
     public function getCredentials()
     {
-        return '';
+        return $this->accessToken;
     }
 
     public function setUserInfo($data)
