@@ -25,12 +25,12 @@ security:
             form_login:
                 default_target_path: admin_secured
                 check_path: trismegiste_logincheck
-                login_path: /
+                login_path: /connect
             logout:
                 path:   /logout
                 target: /
             anonymous: ~
 
     access_control:
-        - { path: ^/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_ADMIN }

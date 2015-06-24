@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="trismegiste_homepage" pattern="/">
+    <route id="trismegiste_homepage" pattern="/connect">
         <default key="_controller">TrismegisteFrontBundle:Default:index</default>
     </route>
 
@@ -16,7 +16,7 @@
         <default key="_controller">TrismegisteFrontBundle:Default:connectWith</default>
     </route>
     
-    <route id="admin_secure" pattern="/admin/dashboard">
+    <route id="admin_secure" pattern="/">
         <default key="_controller">TrismegisteFrontBundle:Default:admin</default>
     </route>
 </routes>
