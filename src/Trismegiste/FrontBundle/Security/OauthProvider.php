@@ -35,7 +35,8 @@ class OauthProvider implements AuthenticationProviderInterface
         /* @var $token \Trismegiste\FrontBundle\Security\Token */
 
         try {
-            $found = $this->userProvider->findByOauthId($token->getProviderKey(), $token->getUserUniqueIdentifier());
+            $found = $this->userProvider
+                    ->findByOauthId($token->getProviderKey(), $token->getUserUniqueIdentifier());
         } catch (Exception $notFound) {
             throw new BadCredentialsException('Bad credentials', 0, $notFound);
         }

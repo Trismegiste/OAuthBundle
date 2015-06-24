@@ -44,7 +44,7 @@ class Token extends AbstractToken
 
     public function getUserUniqueIdentifier()
     {
-        return $this->accessToken->uid;
+        return $this->userInfo->uid;
     }
 
     public function getProviderKey()

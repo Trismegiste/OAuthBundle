@@ -16,13 +16,14 @@ security:
             security: false
 
         secured_area:
-            pattern:    ^/
-            provider: proprietary
+            pattern:   ^/
+            provider:  proprietary
             stateless: false
             oauth: 
-                login_path:        /connect
-                use_forward:       true
-                failure_path:      /connect
+                login_path:   /connect
+                use_forward:  false
+                failure_path: /connect
+                remember_me:  true
             logout:
                 path:   /logout
                 target: /
