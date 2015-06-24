@@ -8,6 +8,7 @@ namespace Trismegiste\FrontBundle\Oauth;
 
 use League\OAuth2\Client\Provider\Github;
 use LogicException;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -16,11 +17,16 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class ProviderFactory implements ProviderFactoryMethod
 {
 
+    /** @var UrlGeneratorInterface */
     protected $urlGenerator;
 
-    public function __construct(UrlGeneratorInterface $gen)
+    /** @var SessionInterface */
+    protected $session;
+
+    public function __construct(UrlGeneratorInterface $gen, SessionInterface $sess)
     {
         $this->urlGenerator = $gen;
+        $this->session = $sess;
     }
 
     public function create($providerKey)

@@ -13,6 +13,7 @@
     <services>
         <service id="oauth.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
             <argument type="service" id="router"/>
+            <argument type="service" id="session"/>
         </service>
         
         <service id="oauth.security.authentication.provider"
