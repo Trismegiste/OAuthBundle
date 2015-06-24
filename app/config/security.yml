@@ -19,7 +19,8 @@ security:
             pattern:    ^/
             provider: proprietary
             stateless: false
-            oauth: true
+            oauth: 
+                login: /connect
             logout:
                 path:   /logout
                 target: /

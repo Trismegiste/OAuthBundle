@@ -8,12 +8,12 @@
         <default key="_controller">TrismegisteFrontBundle:Default:index</default>
     </route>
 
-    <route id="trismegiste_about" pattern="/about">
-        <default key="_controller">TrismegisteFrontBundle:Default:about</default>
-    </route>
-    
     <route id="connect_with" pattern="/connect/{provider}">
         <default key="_controller">TrismegisteFrontBundle:Default:connectWith</default>
+    </route>
+
+    <route id="trismegiste_about" pattern="/about">
+        <default key="_controller">TrismegisteFrontBundle:Default:about</default>
     </route>
     
     <route id="admin_secure" pattern="/">
