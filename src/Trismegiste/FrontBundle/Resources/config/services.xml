@@ -4,16 +4,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
-        <parameters>
-            <parameter key="trismegiste_front.example.class">Trismegiste\FrontBundle\Example</parameter>
-        </parameters>
-    -->
-
     <services>
         <service id="oauth.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
             <argument type="service" id="router"/>
-            <argument type="service" id="session"/>
+            <argument type="service" id="form.csrf_provider"/>
         </service>
         
         <service id="oauth.security.authentication.provider"
