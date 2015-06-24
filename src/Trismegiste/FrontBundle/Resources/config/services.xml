@@ -14,6 +14,30 @@
         <service id="oauth.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
             <argument type="service" id="router"/>
         </service>
+        
+        <service id="oauth.security.authentication.provider"
+                 class="Trismegiste\FrontBundle\Security\OauthProvider" public="false">
+            <argument /> <!-- User Provider -->
+        </service>
+
+        <service id="oauth.security.authentication.listener"
+                 class="Trismegiste\FrontBundle\Security\OauthListener" public="false" abstract="true">
+            <argument type="service" id="oauth.provider.factory"/>
+            <argument type="service" id="security.context" />
+            <argument type="service" id="security.authentication.manager" />
+            <argument type="service" id="security.authentication.session_strategy" />
+            <argument type="service" id="security.http_utils" />
+            <argument />
+            <argument type="service" id="security.authentication.success_handler" />
+            <argument type="service" id="security.authentication.failure_handler" />
+            <argument type="collection" />
+            <argument type="service" id="logger" on-invalid="null" />
+            <argument type="service" id="event_dispatcher" on-invalid="null" />
+            <tag name="monolog.logger" channel="security" />
+        </service>
+        
+        <service id="social.user.provider" class="Trismegiste\FrontBundle\Security\OauthUserProvider"/>
+        
     </services>
 
 </container>

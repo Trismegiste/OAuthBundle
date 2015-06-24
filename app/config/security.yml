@@ -7,11 +7,8 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        hardcoded:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: toto, roles: [ 'ROLE_ADMIN' ] }
+        proprietary:
+            id: social.user.provider
 
     firewalls:
         dev:
@@ -20,12 +17,9 @@ security:
 
         secured_area:
             pattern:    ^/
-            provider: hardcoded
+            provider: proprietary
             stateless: false
-            form_login:
-                default_target_path: admin_secured
-                check_path: /login_check
-                login_path: /connect
+            oauth: true
             logout:
                 path:   /logout
                 target: /

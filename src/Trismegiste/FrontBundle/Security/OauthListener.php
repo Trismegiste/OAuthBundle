@@ -28,6 +28,21 @@ class OauthListener extends AbstractAuthenticationListener
     /** @var ProviderFactoryMethod */
     protected $providerFactory;
 
+    /**
+     * Ctor
+     * 
+     * @param ProviderFactoryMethod $factory
+     * @param SecurityContextInterface $securityContext
+     * @param AuthenticationManagerInterface $authenticationManager
+     * @param SessionAuthenticationStrategyInterface $sessionStrategy
+     * @param HttpUtils $httpUtils
+     * @param type $providerKey
+     * @param AuthenticationSuccessHandlerInterface $successHandler
+     * @param AuthenticationFailureHandlerInterface $failureHandler
+     * @param array $options
+     * @param LoggerInterface $logger
+     * @param EventDispatcherInterface $dispatcher
+     */
     public function __construct(ProviderFactoryMethod $factory, SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $providerKey, AuthenticationSuccessHandlerInterface $successHandler, AuthenticationFailureHandlerInterface $failureHandler, array $options = array(), LoggerInterface $logger = null, EventDispatcherInterface $dispatcher = null)
     {
         $this->providerFactory = $factory;
