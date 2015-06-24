@@ -37,6 +37,25 @@ class OauthListener extends AbstractAuthenticationListener
     protected function attemptAuthentication(Request $request)
     {
         $this->handleOAuthError($request);
+        $provider = $this->providerFactory->create('github'); // @todo
+
+        if (!$request->query->has('state') || ($_SESSION['state'] !== $request->query->get('state'))) {
+            throw new AuthenticationException("Invalid state");
+        }
+
+        try {
+            $token = $provider->getAccessToken('authorization_code', [
+                'code' => $request->query->get('code')
+            ]);
+            // We got an access token, let's now get the user's details
+            $userDetails = $provider->getUserDetails($token);
+            $identifiedToken = new \Trismegiste\FrontBundle\Security\Token('github', $token, ['ROLE_IDENTIFIED']);
+            $identifiedToken->setUserInfo($userDetails); // for registration
+
+            return $this->authenticationManager->authenticate($token);
+        } catch (Exception $e) {
+            throw new AuthenticationException("Failed to validate the oauth token");
+        }
     }
 
     /**
@@ -78,6 +97,48 @@ class OauthListener extends AbstractAuthenticationListener
         if (null !== $error) {
             throw new AuthenticationException($this->transformOAuthError($error));
         }
+    }
+
+    /**
+     * Transforms OAuth error codes into human readable format
+     *
+     * @param string $errorCode
+     *
+     * @return string
+     */
+    private function transformOAuthError($errorCode)
+    {
+        // "translate" error to human readable format
+        switch ($errorCode) {
+            case 'access_denied':
+                return 'You have refused access for this site.';
+
+            case 'authorization_expired':
+                return 'Authorization expired.';
+
+            case 'bad_verification_code':
+                return 'Bad verification code.';
+
+            case 'consumer_key_rejected':
+                return 'You have refused access for this site.';
+
+            case 'incorrect_client_credentials':
+                return 'Incorrect client credentials.';
+
+            case 'invalid_assertion':
+                return 'Invalid assertion.';
+
+            case 'redirect_uri_mismatch':
+                return 'Redirect URI mismatches configured one.';
+
+            case 'unauthorized_client':
+                return 'Unauthorized client.';
+
+            case 'unknown_format':
+                return 'Unknown format.';
+        }
+
+        return sprintf('Unknown OAuth error: "%s".', $errorCode);
     }
 
 }

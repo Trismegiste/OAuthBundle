@@ -17,16 +17,26 @@ class Token extends AbstractToken
     /** @var string */
     private $accessToken;
 
-    public function __construct($accessToken, array $role = [])
+    /** @var string */
+    private $providerKey;
+    private $userInfo;
+
+    public function __construct($providerKey, $accessToken, array $role = [])
     {
         parent::__construct($role);
         $this->setAuthenticated(count($role) > 0);
         $this->accessToken = $accessToken;
+        $this->providerKey = $providerKey;
     }
 
     public function getCredentials()
     {
         return '';
+    }
+
+    public function setUserInfo($data)
+    {
+        $this->userInfo = $data;
     }
 
 }
