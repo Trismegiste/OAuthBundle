@@ -41,7 +41,7 @@ class OAuth2ProviderBridge implements ThirdPartyAuthentication
 
     public function validateRequest(Request $req)
     {
-        if ($this->csrf->isCsrfTokenValid(__CLASS__, $req->query->get(self::STATE_KEY, ''))) {
+        if (!$this->csrf->isCsrfTokenValid(__CLASS__, $req->query->get(self::STATE_KEY, ''))) {
             throw new AuthenticationException("Invalid state");
         }
     }

@@ -19,6 +19,7 @@ class DefaultController extends Template
 
     protected function getTopMenu()
     {
+        print_r($this->get('security.context')->getToken());
         return array('About' => 'trismegiste_about');
     }
 

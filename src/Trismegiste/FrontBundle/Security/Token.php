@@ -6,7 +6,6 @@
 
 namespace Trismegiste\FrontBundle\Security;
 
-use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 /**

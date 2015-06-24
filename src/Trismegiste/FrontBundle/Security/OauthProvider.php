@@ -45,7 +45,7 @@ class OauthProvider implements AuthenticationProviderInterface
             throw new AuthenticationServiceException('findByOauthId() must return a UserInterface.');
         }
 
-        $authenticatedToken = new Token($token->getProviderKey(), $token->getCredentials(), $found->getRoles());
+        $authenticatedToken = new Token($token->getProviderKey(), $token->getUserUniqueIdentifier(), $found->getRoles());
         $authenticatedToken->setAttributes($token->getAttributes());
         $authenticatedToken->setUser($found);
 

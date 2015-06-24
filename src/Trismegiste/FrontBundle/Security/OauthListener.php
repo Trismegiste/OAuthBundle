@@ -53,12 +53,10 @@ class OauthListener extends AbstractAuthenticationListener
     {
         $this->handleOAuthError($request);
         $provider = $this->providerFactory->create('github'); // @todo with a bridge
-
-   //     $provider->validateRequest($request);
+        $provider->validateRequest($request);
 
         try {
             $identifiedToken = $provider->buildToken($request);
-
             return $this->authenticationManager->authenticate($identifiedToken);
         } catch (Exception $e) {
             throw new AuthenticationException("Failed to validate the oauth token");
