@@ -19,15 +19,18 @@ security:
             pattern:   ^/
             provider:  proprietary
             stateless: false
+            anonymous: ~
             oauth: 
                 login_path:   /connect
                 use_forward:  false
                 failure_path: /connect
                 remember_me:  true
+            remember_me:
+                always_remember_me: true
+                key: %secret%
             logout:
                 path:   /logout
                 target: /
-            anonymous: ~
 
     access_control:
         - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }

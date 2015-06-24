@@ -6,8 +6,7 @@
 
 namespace Trismegiste\FrontBundle\Security;
 
-use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Reference;
@@ -15,7 +14,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * OauthSecurityFactory is a factory for all OAuth components required for Symfony security layer
  */
-class OauthSecurityFactory extends \Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory
+class OauthSecurityFactory extends AbstractFactory
 {
 
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)

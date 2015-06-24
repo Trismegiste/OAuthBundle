@@ -26,7 +26,7 @@ class DefaultController extends Template
     public function connectWithAction($provider)
     {
         $factory = $this->get('oauth.provider.factory');
-        $provider = $factory->create('github');
+        $provider = $factory->create($provider);
         // If we don't have an authorization code then get one
         $authUrl = $provider->getAuthorizationUrl();
 
