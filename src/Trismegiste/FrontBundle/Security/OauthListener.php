@@ -54,9 +54,9 @@ class OauthListener extends AbstractAuthenticationListener
         $this->handleOAuthError($request);
         $provider = $this->providerFactory->create('github'); // @todo with a bridge
 
-        if (!$request->query->has('state') || ($_SESSION['state'] !== $request->query->get('state'))) { // bridge
-            throw new AuthenticationException("Invalid state");
-        }
+//        if (!$request->query->has('state') || ($_SESSION['state'] !== $request->query->get('state'))) { // bridge
+//            throw new AuthenticationException("Invalid state");
+//        }
 
         try {
             $token = $provider->getAccessToken('authorization_code', [
@@ -67,7 +67,7 @@ class OauthListener extends AbstractAuthenticationListener
             $identifiedToken = new \Trismegiste\FrontBundle\Security\Token('github', $token, ['ROLE_IDENTIFIED']);
             $identifiedToken->setUserInfo($userDetails); // for registration
 
-            return $this->authenticationManager->authenticate($token);
+            return $this->authenticationManager->authenticate($identifiedToken);
         } catch (Exception $e) {
             throw new AuthenticationException("Failed to validate the oauth token");
         }

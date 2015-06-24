@@ -22,17 +22,17 @@ class OauthUserProvider implements OauthUserProviderInterface, UserProviderInter
 
     public function findByOauthId($provider, $uid)
     {
-        
+        return new OauthUser('admin');
     }
 
     public function loadUserByUsername($username)
     {
-        
+        return new OauthUser($username);
     }
 
     public function refreshUser(UserInterface $user)
     {
-        
+        return $user;
     }
 
     public function supportsClass($class)

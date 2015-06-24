@@ -16,9 +16,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class OauthUser implements UserInterface
 {
 
-    public function __construct()
+    protected $name;
+
+    public function __construct($str)
     {
-        
+        $this->name = $str;
     }
 
     public function eraseCredentials()
@@ -33,7 +35,7 @@ class OauthUser implements UserInterface
 
     public function getRoles()
     {
-        
+        return ['ROLE_USER'];
     }
 
     public function getSalt()
@@ -43,7 +45,7 @@ class OauthUser implements UserInterface
 
     public function getUsername()
     {
-        
+        return $this->name;
     }
 
 }

@@ -20,7 +20,9 @@ security:
             provider: proprietary
             stateless: false
             oauth: 
-                login: /connect
+                login_path:        /connect
+                use_forward:       true
+                failure_path:      /connect
             logout:
                 path:   /logout
                 target: /
@@ -28,4 +30,4 @@ security:
 
     access_control:
         - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_ADMIN }
+        - { path: ^/, roles: ROLE_USER }

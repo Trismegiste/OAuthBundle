@@ -40,13 +40,13 @@ class OauthProvider implements AuthenticationProviderInterface
             throw new BadCredentialsException('Bad credentials', 0, $notFound);
         }
 
-        if (!$user instanceof UserInterface) {
+        if (!$found instanceof UserInterface) {
             throw new AuthenticationServiceException('findByOauthId() must return a UserInterface.');
         }
 
-        $authenticatedToken = new Token($token->getProviderKey(), $token->getCredentials(), $user->getRoles());
+        $authenticatedToken = new Token($token->getProviderKey(), $token->getCredentials(), $found->getRoles());
         $authenticatedToken->setAttributes($token->getAttributes());
-        $authenticatedToken->setUser($user);
+        $authenticatedToken->setUser($found);
 
         return $authenticatedToken;
     }
