@@ -14,14 +14,16 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 class Token extends AbstractToken
 {
 
-    /** @var string */
+    /** @var \League\OAuth2\Client\Token\AccessToken */
     private $accessToken;
 
     /** @var string */
     private $providerKey;
+
+    /** @var array */
     private $userInfo;
 
-    public function __construct($providerKey, $accessToken, array $role = [])
+    public function __construct($providerKey, \League\OAuth2\Client\Token\AccessToken $accessToken, array $role = [])
     {
         parent::__construct($role);
         $this->setAuthenticated(count($role) > 0);
@@ -37,6 +39,16 @@ class Token extends AbstractToken
     public function setUserInfo($data)
     {
         $this->userInfo = $data;
+    }
+
+    public function getUserUniqueIdentifier()
+    {
+        return $this->accessToken->uid;
+    }
+
+    public function getProviderKey()
+    {
+        return $this->providerKey;
     }
 
 }

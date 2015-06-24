@@ -37,15 +37,15 @@ class OauthListener extends AbstractAuthenticationListener
     protected function attemptAuthentication(Request $request)
     {
         $this->handleOAuthError($request);
-        $provider = $this->providerFactory->create('github'); // @todo
+        $provider = $this->providerFactory->create('github'); // @todo with a bridge
 
-        if (!$request->query->has('state') || ($_SESSION['state'] !== $request->query->get('state'))) {
+        if (!$request->query->has('state') || ($_SESSION['state'] !== $request->query->get('state'))) { // bridge
             throw new AuthenticationException("Invalid state");
         }
 
         try {
             $token = $provider->getAccessToken('authorization_code', [
-                'code' => $request->query->get('code')
+                'code' => $request->query->get('code')  // @todo Bridge for Provider
             ]);
             // We got an access token, let's now get the user's details
             $userDetails = $provider->getUserDetails($token);
