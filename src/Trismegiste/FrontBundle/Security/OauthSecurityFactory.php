@@ -14,28 +14,23 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * OauthSecurityFactory is a factory for all OAuth components required for Symfony security layer
- * 
- * => sous classe de AbstractFactory pour le remeber me ?
  */
-class OauthSecurityFactory implements SecurityFactoryInterface
+class OauthSecurityFactory extends \Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory
 {
 
-    public function addConfiguration(NodeDefinition $builder)
+    protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
     {
-        
+        $provider = 'security.authentication.provider.oauth.' . $id;
+        $container
+                ->setDefinition($provider, new DefinitionDecorator('oauth.security.authentication.provider'))
+                ->replaceArgument(0, new Reference($userProviderId));
+
+        return $provider;
     }
 
-    public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
+    protected function getListenerId()
     {
-        $providerId = 'security.authentication.provider.oauth.' . $id;
-        $container
-                ->setDefinition($providerId, new DefinitionDecorator('oauth.security.authentication.provider'))
-                ->replaceArgument(0, new Reference($userProvider));
-
-        $listenerId = 'security.authentication.listener.oauth.' . $id;
-        $listener = $container->setDefinition($listenerId, new DefinitionDecorator('oauth.security.authentication.listener'));
-
-        return array($providerId, $listenerId, $defaultEntryPoint);
+        return 'oauth.security.authentication.listener';
     }
 
     public function getKey()

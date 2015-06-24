@@ -31,7 +31,6 @@ class OauthListener extends AbstractAuthenticationListener
     /**
      * Ctor
      * 
-     * @param ProviderFactoryMethod $factory
      * @param SecurityContextInterface $securityContext
      * @param AuthenticationManagerInterface $authenticationManager
      * @param SessionAuthenticationStrategyInterface $sessionStrategy
@@ -42,11 +41,12 @@ class OauthListener extends AbstractAuthenticationListener
      * @param array $options
      * @param LoggerInterface $logger
      * @param EventDispatcherInterface $dispatcher
+     * @param ProviderFactoryMethod $factory
      */
-    public function __construct(ProviderFactoryMethod $factory, SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $providerKey, AuthenticationSuccessHandlerInterface $successHandler, AuthenticationFailureHandlerInterface $failureHandler, array $options = array(), LoggerInterface $logger = null, EventDispatcherInterface $dispatcher = null)
+    public function __construct(SecurityContextInterface $securityContext, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $providerKey, AuthenticationSuccessHandlerInterface $successHandler, AuthenticationFailureHandlerInterface $failureHandler, array $options = array(), LoggerInterface $logger = null, EventDispatcherInterface $dispatcher = null, ProviderFactoryMethod $factory)
     {
-        $this->providerFactory = $factory;
         parent::__construct($securityContext, $authenticationManager, $sessionStrategy, $httpUtils, $providerKey, $successHandler, $failureHandler, $options, $logger, $dispatcher);
+        $this->providerFactory = $factory;
     }
 
     protected function attemptAuthentication(Request $request)
