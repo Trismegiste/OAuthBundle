@@ -12,6 +12,6 @@ namespace Trismegiste\FrontBundle\Oauth;
 interface ProviderFactoryMethod
 {
 
-    /** @return \League\OAuth2\Client\Provider\AbstractProvider */
+    /** @return ThirdPartyAuthentication */
     public function create($code);
 }

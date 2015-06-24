@@ -14,7 +14,15 @@ use Symfony\Component\HttpFoundation\Request;
 interface ThirdPartyAuthentication
 {
 
-    public function getAuthorizationUrl($param);
+    public function getAuthorizationUrl();
 
     public function validateRequest(Request $req);
+
+    /**
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $req
+     * 
+     * @return \Trismegiste\FrontBundle\Security\Token
+     */
+    public function buildToken(Request $req);
 }

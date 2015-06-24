@@ -15,36 +15,28 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 class Token extends AbstractToken
 {
 
-    /** @var AccessToken */
-    private $accessToken;
+    /** @var string */
+    private $uniqueId;
 
     /** @var string */
     private $providerKey;
 
-    /** @var array */
-    private $userInfo;
-
-    public function __construct($providerKey, AccessToken $accessToken, array $role = [])
+    public function __construct($providerKey, $uid, array $role = [])
     {
         parent::__construct($role);
         $this->setAuthenticated(count($role) > 0);
-        $this->accessToken = $accessToken;
+        $this->uniqueId = $uid;
         $this->providerKey = $providerKey;
     }
 
     public function getCredentials()
     {
-        return $this->accessToken;
-    }
-
-    public function setUserInfo($data)
-    {
-        $this->userInfo = $data;
+        return '';
     }
 
     public function getUserUniqueIdentifier()
     {
-        return $this->userInfo->uid;
+        return $this->uniqueId;
     }
 
     public function getProviderKey()

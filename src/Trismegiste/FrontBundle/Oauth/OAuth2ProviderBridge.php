@@ -10,6 +10,7 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Trismegiste\FrontBundle\Security\Token;
 
 /**
  * OAuth2ProviderBridge is a bridge to enapsulate Provider from OAuth2-client
@@ -40,9 +41,24 @@ class OAuth2ProviderBridge implements ThirdPartyAuthentication
 
     public function validateRequest(Request $req)
     {
-        if ($this->csrf->isCsrfTokenValid(__CLASS__, $request->query->get(self::STATE_KEY, ''))) {
+        if ($this->csrf->isCsrfTokenValid(__CLASS__, $req->query->get(self::STATE_KEY, ''))) {
             throw new AuthenticationException("Invalid state");
         }
+    }
+
+    public function buildToken(Request $req)
+    {
+        $token = $this->provider->getAccessToken('authorization_code', [
+            'code' => $req->query->get('code')
+        ]);
+
+        // We got an access token, let's now get the user's details
+        /** @var \League\OAuth2\Client\Entity\User */
+        $userDetails = $this->provider->getUserDetails($token);
+        $internToken = new Token('github', $userDetails->uid, ['ROLE_IDENTIFIED']);
+        $internToken->setAttribute('nickname', $userDetails->nickname);
+
+        return $internToken;
     }
 
 }

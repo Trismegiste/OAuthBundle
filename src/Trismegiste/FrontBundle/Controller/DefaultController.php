@@ -28,7 +28,6 @@ class DefaultController extends Template
         $provider = $factory->create('github');
         // If we don't have an authorization code then get one
         $authUrl = $provider->getAuthorizationUrl();
-        $this->get('session')->set('oauth2state', $provider->state);
 
         return new RedirectResponse($authUrl);
     }
