@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * ProviderFactory 
  */
-class ProviderFactory
+class ProviderFactory implements ProviderFactoryMethod
 {
 
     protected $urlGenerator;

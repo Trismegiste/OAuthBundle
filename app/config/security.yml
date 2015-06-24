@@ -24,7 +24,7 @@ security:
             stateless: false
             form_login:
                 default_target_path: admin_secured
-                check_path: trismegiste_logincheck
+                check_path: /login_check
                 login_path: /connect
             logout:
                 path:   /logout
