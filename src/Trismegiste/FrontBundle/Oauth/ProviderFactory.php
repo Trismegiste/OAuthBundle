@@ -50,8 +50,7 @@ class ProviderFactory implements ProviderFactoryMethod
                 return new OAuth2ProviderBridge(new Github([
                     'clientId' => $cfg['public'],
                     'clientSecret' => $cfg['secret'],
-                    'redirectUri' => $this->urlGenerator
-                            ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'redirectUri' => $this->generateLoginCheckUrl($providerKey),
                     'scopes' => [],
                         ]), $this->csrf);
                 break;
@@ -60,15 +59,21 @@ class ProviderFactory implements ProviderFactoryMethod
                 return new OAuth1ProviderBridge(new Twitter([
                     'identifier' => $cfg['public'],
                     'secret' => $cfg['secret'],
-                    'callback_uri' => $this->urlGenerator
-                            ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
-                    'scopes' => [],
+                    'callback_uri' => $this->generateLoginCheckUrl($providerKey)
                         ]), $this->session);
                 break;
 
             default:
                 throw new LogicException("$providerKey is not supported");
         }
+    }
+
+    protected function generateLoginCheckUrl($providerKey)
+    {
+        return $this->urlGenerator
+                        ->generate('trismegiste_logincheck', [
+                            'provider' => $providerKey
+                                ], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
 }
