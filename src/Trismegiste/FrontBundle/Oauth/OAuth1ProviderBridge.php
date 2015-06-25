@@ -10,6 +10,7 @@ use League\OAuth1\Client\Server\Server;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Trismegiste\FrontBundle\Security\Token;
 
 /**
  * OAuth1ProviderBridge is a bridge over the OAuth1 provider Server

@@ -7,9 +7,12 @@
 namespace Trismegiste\FrontBundle\Oauth;
 
 use League\OAuth2\Client\Provider\Github;
+use League\OAuth2\Client\Provider\Google;
 use LogicException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
+use League\OAuth1\Client\Server\Twitter;
+use League\OAuth1\Client\Server\Tumblr;
 
 /**
  * ProviderFactory 
@@ -55,6 +58,15 @@ class ProviderFactory implements ProviderFactoryMethod
                         ]), $this->csrf);
                 break;
 
+            case 'google':
+                return new OAuth2ProviderBridge(new Google([
+                    'clientId' => $cfg['public'],
+                    'clientSecret' => $cfg['secret'],
+                    'redirectUri' => $this->generateLoginCheckUrl($providerKey),
+                    'scopes' => ['profile'],
+                        ]), $this->csrf);
+                break;
+
             case 'twitter':
                 return new OAuth1ProviderBridge(new Twitter([
                     'identifier' => $cfg['public'],
@@ -63,6 +75,13 @@ class ProviderFactory implements ProviderFactoryMethod
                         ]), $this->session);
                 break;
 
+            case 'tumblr':
+                return new OAuth1ProviderBridge(new Tumblr([
+                    'identifier' => $cfg['public'],
+                    'secret' => $cfg['secret'],
+                    'callback_uri' => $this->generateLoginCheckUrl($providerKey)
+                        ]), $this->session);
+                break;
             default:
                 throw new LogicException("$providerKey is not supported");
         }

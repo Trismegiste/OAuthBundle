@@ -6,4 +6,13 @@
 </div>
 {{ url('trismegiste_logincheck',{provider:'github'}) }}
 <a href="{{ path('connect_with', {provider:"github"}) }}" class="btn-success">Login with github</a>
+<br/>
+{{ url('trismegiste_logincheck',{provider:'twitter'}) }}
+<a href="{{ path('connect_with', {provider:"twitter"}) }}" class="btn-success">Login with twitter</a>
+<br/>
+{{ url('trismegiste_logincheck',{provider:'google'}) }}
+<a href="{{ path('connect_with', {provider:"google"}) }}" class="btn-success">Login with google</a>
+<br/>
+{{ url('trismegiste_logincheck',{provider:'tumblr'}) }}
+<a href="{{ path('connect_with', {provider:"tumblr"}) }}" class="btn-success">Login with tumblr</a>
 {% endblock %}
