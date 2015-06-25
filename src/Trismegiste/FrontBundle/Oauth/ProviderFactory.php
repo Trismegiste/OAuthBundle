@@ -42,6 +42,16 @@ class ProviderFactory implements ProviderFactoryMethod
                         ]), $this->csrf);
                 break;
 
+            case 'twitter':
+                return new OAuth1ProviderBridge(new Twitter([
+                    'clientId' => '51a83ff9f1216abd83ee',
+                    'clientSecret' => '36a8f497751ba31321ad47fbba68fc42eb24bf8e',
+                    'redirectUri' => $this->urlGenerator
+                            ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
+                    'scopes' => [],
+                        ]), $this->csrf);
+                break;
+
             default:
                 throw new LogicException("$providerKey is not supported");
         }

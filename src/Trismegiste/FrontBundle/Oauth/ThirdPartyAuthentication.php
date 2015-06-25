@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 interface ThirdPartyAuthentication
 {
 
+    const IDENTIFIED = 'ROLE_IDENTIFIED';
+
     public function getAuthorizationUrl();
 
     public function validateRequest(Request $req);
