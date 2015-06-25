@@ -49,6 +49,13 @@ class OauthListener extends AbstractAuthenticationListener
         $this->providerFactory = $factory;
     }
 
+    /**
+     * Reminder : this method is called by parent::handle() if parent::requiresAuthentication() is true
+     * in other words if 'check_path' option is matched with the curent Request (default behavior).
+     * You must define a valid route, even if no controller is defined because
+     * the router will kick the request out if the route does not exist in the first
+     * place
+     */
     protected function attemptAuthentication(Request $request)
     {
         $this->handleOAuthError($request);
