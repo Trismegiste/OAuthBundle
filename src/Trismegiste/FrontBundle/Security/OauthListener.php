@@ -59,7 +59,8 @@ class OauthListener extends AbstractAuthenticationListener
     protected function attemptAuthentication(Request $request)
     {
         $this->handleOAuthError($request);
-        $provider = $this->providerFactory->create('github'); // @todo with a bridge
+        $providerKey = $this->getProviderKey($request);
+        $provider = $this->providerFactory->create($providerKey);
         $provider->validateRequest($request);
 
         try {
@@ -77,6 +78,8 @@ class OauthListener extends AbstractAuthenticationListener
      * @param Request $request
      *
      * @throws AuthenticationException
+     * 
+     * Note: Copy-pasted from HwiOAuthBundle
      */
     private function handleOAuthError(Request $request)
     {
@@ -153,9 +156,9 @@ class OauthListener extends AbstractAuthenticationListener
         return sprintf('Unknown OAuth error: "%s".', $errorCode);
     }
 
-    protected function getProvider(Request $req)
+    protected function getProviderKey(Request $req)
     {
-        return $req->attributes['provider'];
+        return $req->attributes->get('provider');
     }
 
 }
