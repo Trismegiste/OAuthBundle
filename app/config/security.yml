@@ -21,9 +21,9 @@ security:
             stateless: false
             anonymous: ~
             oauth: 
-                login_path:   trismegiste_login
+                login_path:   trismegiste_connect
                 use_forward:  false
-                failure_path: trismegiste_login
+                failure_path: trismegiste_connect
                 check_path:   trismegiste_logincheck
                 remember_me:  true
             remember_me:

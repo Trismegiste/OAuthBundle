@@ -4,10 +4,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="trismegiste_homepage" pattern="/connect">
+    <route id="trismegiste_homepage" pattern="/">
         <default key="_controller">TrismegisteFrontBundle:Default:index</default>
     </route>
-
+    
+    <route id="trismegiste_connect" pattern="/connect">
+        <default key="_controller">TrismegisteFrontBundle:Default:connect</default>
+    </route>
+    
     <route id="connect_with" pattern="/connect/{provider}">
         <default key="_controller">TrismegisteFrontBundle:Default:connectWith</default>
     </route>

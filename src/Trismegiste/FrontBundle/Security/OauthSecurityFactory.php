@@ -42,4 +42,16 @@ class OauthSecurityFactory extends AbstractFactory
         return 'form';
     }
 
+    protected function createEntryPoint($container, $id, $config, $defaultEntryPoint)
+    {
+        $entryPointId = 'security.authentication.oauth_entry_point.' . $id;
+        $container
+                ->setDefinition($entryPointId, new DefinitionDecorator('oauth.security.authentication.entry_point'))
+                ->addArgument(new Reference('security.http_utils'))
+                ->addArgument($config['login_path'])
+        ;
+
+        return $entryPointId;
+    }
+
 }

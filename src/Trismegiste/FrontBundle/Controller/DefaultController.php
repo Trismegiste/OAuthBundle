@@ -23,6 +23,11 @@ class DefaultController extends Template
         return array('About' => 'trismegiste_about');
     }
 
+    public function connectAction()
+    {
+        return $this->render('TrismegisteFrontBundle:Default:connect.html.twig');
+    }
+
     public function connectWithAction($provider)
     {
         $factory = $this->get('oauth.provider.factory');

@@ -24,6 +24,11 @@
         
         <service id="social.user.provider" class="Trismegiste\FrontBundle\Security\OauthUserProvider"/>
         
+        <service id="oauth.security.authentication.entry_point"
+                  class="Trismegiste\FrontBundle\Security\OauthEntryPoint" 
+                  public="false" abstract="true">
+        </service>
+        
     </services>
 
 </container>
