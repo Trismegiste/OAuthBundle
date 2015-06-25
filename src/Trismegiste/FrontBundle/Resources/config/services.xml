@@ -6,6 +6,7 @@
 
     <services>
         <service id="oauth.provider.factory" class="Trismegiste\FrontBundle\Oauth\ProviderFactory">
+            <argument type="service" id="dynamic_config"/>
             <argument type="service" id="router"/>
             <argument type="service" id="form.csrf_provider"/>
             <argument type="service" id="session"/>
@@ -26,9 +27,11 @@
         <service id="social.user.provider" class="Trismegiste\FrontBundle\Security\OauthUserProvider"/>
         
         <service id="oauth.security.authentication.entry_point"
-                  class="Trismegiste\FrontBundle\Security\OauthEntryPoint" 
-                  public="false" abstract="true">
+                 class="Trismegiste\FrontBundle\Security\OauthEntryPoint" 
+                 public="false" abstract="true">
         </service>
+        
+        <service id="dynamic_config" class="Trismegiste\FrontBundle\DependencyInjection\DynamicConfig"/> 
         
     </services>
 

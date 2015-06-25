@@ -26,20 +26,30 @@ class ProviderFactory implements ProviderFactoryMethod
     /** @var SessionInterface */
     protected $session;
 
-    public function __construct(UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, \Symfony\Component\HttpFoundation\Session\SessionInterface $sess)
+    /** var array */
+    protected $providerConfig;
+
+    public function __construct(\ArrayAccess $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, \Symfony\Component\HttpFoundation\Session\SessionInterface $sess)
     {
         $this->urlGenerator = $gen;
         $this->csrf = $csrfService;
         $this->session = $sess;
+        $this->providerConfig = $config['oauth'];
     }
 
     public function create($providerKey)
     {
+        if (!array_key_exists($providerKey, $this->providerConfig)) {
+            throw new \RuntimeException("$providerKey is not configured");
+        }
+
+        $cfg = $this->providerConfig[$providerKey];
+
         switch ($providerKey) {
             case 'github':
                 return new OAuth2ProviderBridge(new Github([
-                    'clientId' => '51a83ff9f1216abd83ee',
-                    'clientSecret' => '36a8f497751ba31321ad47fbba68fc42eb24bf8e',
+                    'clientId' => $cfg['public'],
+                    'clientSecret' => $cfg['secret'],
                     'redirectUri' => $this->urlGenerator
                             ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
                     'scopes' => [],
@@ -48,9 +58,9 @@ class ProviderFactory implements ProviderFactoryMethod
 
             case 'twitter':
                 return new OAuth1ProviderBridge(new Twitter([
-                    'clientId' => '51a83ff9f1216abd83ee',
-                    'clientSecret' => '36a8f497751ba31321ad47fbba68fc42eb24bf8e',
-                    'redirectUri' => $this->urlGenerator
+                    'identifier' => $cfg['public'],
+                    'secret' => $cfg['secret'],
+                    'callback_uri' => $this->urlGenerator
                             ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
                     'scopes' => [],
                         ]), $this->session);
