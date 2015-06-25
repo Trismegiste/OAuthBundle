@@ -23,10 +23,14 @@ class ProviderFactory implements ProviderFactoryMethod
     /** @var CsrfProviderInterface */
     protected $csrf;
 
-    public function __construct(UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService)
+    /** @var SessionInterface */
+    protected $session;
+
+    public function __construct(UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, \Symfony\Component\HttpFoundation\Session\SessionInterface $sess)
     {
         $this->urlGenerator = $gen;
         $this->csrf = $csrfService;
+        $this->session = $sess;
     }
 
     public function create($providerKey)
@@ -49,7 +53,7 @@ class ProviderFactory implements ProviderFactoryMethod
                     'redirectUri' => $this->urlGenerator
                             ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
                     'scopes' => [],
-                        ]), $this->csrf);
+                        ]), $this->session);
                 break;
 
             default:
