@@ -51,11 +51,12 @@ class OAuth2ProviderBridge implements ThirdPartyAuthentication
         $token = $this->provider->getAccessToken('authorization_code', [
             'code' => $req->query->get('code')
         ]);
+        $providerKey = $req->attributes->get('provider');
 
         // We got an access token, let's now get the user's details
         /** @var \League\OAuth2\Client\Entity\User */
         $userDetails = $this->provider->getUserDetails($token);
-        $internToken = new Token('github', $userDetails->uid, ['ROLE_IDENTIFIED']);
+        $internToken = new Token($providerKey, $userDetails->uid, ['ROLE_IDENTIFIED']);
         $internToken->setAttribute('nickname', $userDetails->nickname);
 
         return $internToken;
