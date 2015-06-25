@@ -4,6 +4,6 @@
 <div class="hero-unit">
     <h1>Hello World</h1>
 </div>
-{{ url('trismegiste_logincheck') }}
+{{ url('trismegiste_logincheck',{provider:'github'}) }}
 <a href="{{ path('connect_with', {provider:"github"}) }}" class="btn-success">Login with github</a>
 {% endblock %}

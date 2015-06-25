@@ -153,4 +153,9 @@ class OauthListener extends AbstractAuthenticationListener
         return sprintf('Unknown OAuth error: "%s".', $errorCode);
     }
 
+    protected function getProvider(Request $req)
+    {
+        return $req->attributes['provider'];
+    }
+
 }

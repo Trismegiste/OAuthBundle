@@ -37,7 +37,7 @@ class ProviderFactory implements ProviderFactoryMethod
                     'clientId' => '51a83ff9f1216abd83ee',
                     'clientSecret' => '36a8f497751ba31321ad47fbba68fc42eb24bf8e',
                     'redirectUri' => $this->urlGenerator
-                            ->generate('trismegiste_logincheck', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                            ->generate('trismegiste_logincheck', ['provider' => $providerKey], UrlGeneratorInterface::ABSOLUTE_URL),
                     'scopes' => [],
                         ]), $this->csrf);
                 break;

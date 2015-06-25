@@ -24,9 +24,10 @@ security:
                 login_path:   trismegiste_login
                 use_forward:  false
                 failure_path: trismegiste_login
+                check_path:   trismegiste_logincheck
                 remember_me:  true
             remember_me:
-                always_remember_me: true
+                always_remember_me: false
                 key: %secret%
             logout:
                 path:   /logout
