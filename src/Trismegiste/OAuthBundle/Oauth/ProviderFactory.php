@@ -18,10 +18,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * ProviderFactory 
+ * ProviderFactory
  */
 class ProviderFactory implements ProviderFactoryMethod
 {
+
+    const DUMMY_PROVIDER = 'dummy';
 
     /** @var UrlGeneratorInterface */
     protected $urlGenerator;
@@ -42,7 +44,7 @@ class ProviderFactory implements ProviderFactoryMethod
         $this->session = $sess;
         $this->providerConfig = $config['oauth'];
         if ($debug) {
-            $this->providerConfig['dummy'] = [];
+            $this->providerConfig[self::DUMMY_PROVIDER] = [];
         }
     }
 
@@ -90,7 +92,7 @@ class ProviderFactory implements ProviderFactoryMethod
                         ]), $this->session);
                 break;
 
-            case 'dummy':
+            case self::DUMMY_PROVIDER:
                 return new DummyBridge($callback, $this->urlGenerator);
                 break;
 
