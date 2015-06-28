@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Security;
+namespace Trismegiste\OAuthBundle\Security;
 
 use Exception;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class OauthProvider implements AuthenticationProviderInterface
 {
 
-    /** @var \Trismegiste\FrontBundle\Security\OauthUserProviderInterface */
+    /** @var \Trismegiste\OAuthBundle\Security\OauthUserProviderInterface */
     protected $userProvider;
 
     public function __construct(OauthUserProviderInterface $repository)
@@ -32,7 +32,7 @@ class OauthProvider implements AuthenticationProviderInterface
         if (!$this->supports($token)) {
             return;
         }
-        /* @var $token \Trismegiste\FrontBundle\Security\Token */
+        /* @var $token \Trismegiste\OAuthBundle\Security\Token */
 
         try {
             $found = $this->userProvider

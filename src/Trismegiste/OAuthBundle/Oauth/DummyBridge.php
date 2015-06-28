@@ -4,11 +4,11 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Trismegiste\FrontBundle\Security\Token;
+use Trismegiste\OAuthBundle\Security\Token;
 
 /**
  * DummyBridge is a dummy oauth bridge

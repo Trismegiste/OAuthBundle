@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Security;
+namespace Trismegiste\OAuthBundle\Security;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

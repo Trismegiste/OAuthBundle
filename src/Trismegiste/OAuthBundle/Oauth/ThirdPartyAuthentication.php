@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,7 +24,7 @@ interface ThirdPartyAuthentication
      * 
      * @param \Symfony\Component\HttpFoundation\Request $req
      * 
-     * @return \Trismegiste\FrontBundle\Security\Token
+     * @return \Trismegiste\OAuthBundle\Security\Token
      */
     public function buildToken(Request $req);
 }

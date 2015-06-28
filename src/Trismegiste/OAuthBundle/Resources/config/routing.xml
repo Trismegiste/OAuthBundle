@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="trismegiste_oauth_connect" pattern="/connect">
+    </route>
+
+    <route id="trismegiste_oauth_connect_with" pattern="/connect/{provider}">
+    </route>
+
+    <route id="trismegiste_oauth_check" pattern="/oauth_check/{provider}">
+    </route>
+
+    <route id="trismegiste_oauth_logout" pattern="/logout">
+    </route>
+
+    <route id="trismegiste_oauth_dummyserver" pattern="/connect/oauth/authorize">
+        <default key="_controller">TrismegisteOAuthBundle:OAuthServer:authorize</default>
+    </route>
+
+</routes>

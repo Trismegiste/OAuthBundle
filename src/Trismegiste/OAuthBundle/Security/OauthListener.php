@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Security;
+namespace Trismegiste\OAuthBundle\Security;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +17,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 use Symfony\Component\Security\Http\Firewall\AbstractAuthenticationListener;
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\Security\Http\Session\SessionAuthenticationStrategyInterface;
-use Trismegiste\FrontBundle\Oauth\ProviderFactoryMethod;
+use Trismegiste\OAuthBundle\Oauth\ProviderFactoryMethod;
 
 /**
  * OauthListener is a firewall listener

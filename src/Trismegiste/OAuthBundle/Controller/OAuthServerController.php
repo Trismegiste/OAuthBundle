@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Controller;
+namespace Trismegiste\OAuthBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +19,7 @@ class OAuthServerController extends Controller
     {
         $url = $request->get('redirect');
 
-        return $this->render('TrismegisteFrontBundle:Default:oauth_authorize.html.twig', ['redirect' => $url]);
+        return $this->render('TrismegisteOAuthBundle:OAuthServer:oauth_authorize.html.twig', ['redirect' => $url]);
     }
 
 }

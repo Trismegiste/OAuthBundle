@@ -8,6 +8,7 @@ namespace Trismegiste\FrontBundle\Security;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Trismegiste\OAuthBundle\Security\OauthUserProviderInterface;
 
 /**
  * OauthUserProvider provides users
@@ -17,7 +18,7 @@ class OauthUserProvider implements OauthUserProviderInterface, UserProviderInter
 
     public function __construct()
     {
-        
+
     }
 
     public function findByOauthId($provider, $uid)

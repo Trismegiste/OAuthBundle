@@ -4,13 +4,13 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth;
 
 use League\OAuth1\Client\Server\Server;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Trismegiste\FrontBundle\Security\Token;
+use Trismegiste\OAuthBundle\Security\Token;
 
 /**
  * OAuth1ProviderBridge is a bridge over the OAuth1 provider Server

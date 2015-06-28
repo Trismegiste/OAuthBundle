@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth;
 
 use ArrayAccess;
 use League\OAuth1\Client\Server\Tumblr;

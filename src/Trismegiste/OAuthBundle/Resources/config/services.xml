@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="oauth.provider.factory" class="Trismegiste\OAuthBundle\Oauth\ProviderFactory">
+            <argument type="service" id="dynamic_config"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="form.csrf_provider"/>
+            <argument type="service" id="session"/>
+            <argument>%kernel.debug%</argument>
+        </service>
+
+        <service id="oauth.security.authentication.provider"
+                 class="Trismegiste\OAuthBundle\Security\OauthProvider" public="false">
+            <argument /> <!-- User Provider -->
+        </service>
+
+        <service id="oauth.security.authentication.listener"
+                 class="Trismegiste\OAuthBundle\Security\OauthListener"
+                 public="false" abstract="true"
+                 parent="security.authentication.listener.abstract" >
+            <argument type="service" id="oauth.provider.factory"/>
+        </service>
+
+        <service id="oauth.security.authentication.entry_point"
+                 class="Trismegiste\OAuthBundle\Security\OauthEntryPoint"
+                 public="false" abstract="true">
+        </service>
+
+        <service id="dynamic_config" class="Trismegiste\FrontBundle\DependencyInjection\DynamicConfig"/>
+
+    </services>
+</container>

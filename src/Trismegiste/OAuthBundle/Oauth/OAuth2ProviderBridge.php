@@ -4,13 +4,13 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Trismegiste\FrontBundle\Security\Token;
+use Trismegiste\OAuthBundle\Security\Token;
 
 /**
  * OAuth2ProviderBridge is a bridge to enapsulate Provider from OAuth2-client

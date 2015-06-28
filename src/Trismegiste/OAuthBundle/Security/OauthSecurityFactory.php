@@ -4,7 +4,7 @@
  * connect-oauth
  */
 
-namespace Trismegiste\FrontBundle\Security;
+namespace Trismegiste\OAuthBundle\Security;
 
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AbstractFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
