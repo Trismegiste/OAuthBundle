@@ -4,18 +4,9 @@
 <div class="hero-unit">
     <h1>Hello World</h1>
 </div>
-{{ url('trismegiste_oauth_check',{provider:'github'}) }}
-<a href="{{ path('trismegiste_oauth_connect_with', {provider:"github"}) }}" class="btn-success">Login with github</a>
+{% for item in provider %}
+{{ url('trismegiste_oauth_check',{provider:item}) }}
+<a href="{{ path('trismegiste_oauth_connect_with', {provider:item}) }}" class="btn-success">Login with {{ item }}</a>
 <br/>
-{{ url('trismegiste_oauth_check',{provider:'twitter'}) }}
-<a href="{{ path('trismegiste_oauth_connect_with', {provider:"twitter"}) }}" class="btn-success">Login with twitter</a>
-<br/>
-{{ url('trismegiste_oauth_check',{provider:'google'}) }}
-<a href="{{ path('trismegiste_oauth_connect_with', {provider:"google"}) }}" class="btn-success">Login with google</a>
-<br/>
-{{ url('trismegiste_oauth_check',{provider:'tumblr'}) }}
-<a href="{{ path('trismegiste_oauth_connect_with', {provider:"tumblr"}) }}" class="btn-success">Login with tumblr</a>
-<br/>
-{{ url('trismegiste_oauth_check',{provider:'dummy'}) }}
-<a href="{{ path('trismegiste_oauth_connect_with', {provider:"dummy"}) }}" class="btn-success">Login with dummy</a>
+{% endfor %}
 {% endblock %}

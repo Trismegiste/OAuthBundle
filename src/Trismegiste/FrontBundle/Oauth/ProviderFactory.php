@@ -35,13 +35,15 @@ class ProviderFactory implements ProviderFactoryMethod
     /** var array */
     protected $providerConfig;
 
-    public function __construct(ArrayAccess $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess)
+    public function __construct(ArrayAccess $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess, $debug = false)
     {
         $this->urlGenerator = $gen;
         $this->csrf = $csrfService;
         $this->session = $sess;
         $this->providerConfig = $config['oauth'];
-        $this->providerConfig['dummy'] = [];
+        if ($debug) {
+            $this->providerConfig['dummy'] = [];
+        }
     }
 
     public function create($providerKey)
@@ -103,6 +105,11 @@ class ProviderFactory implements ProviderFactoryMethod
                         ->generate('trismegiste_oauth_check', [
                             'provider' => $providerKey
                                 ], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function getAvaliableProvider()
+    {
+        return array_keys($this->providerConfig);
     }
 
 }
