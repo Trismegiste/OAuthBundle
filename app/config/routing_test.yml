@@ -1,5 +1,0 @@
-oauth_server:
-    pattern: /oauth2/authorize
-
-_main:
-    resource: routing_dev.yml
