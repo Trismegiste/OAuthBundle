@@ -47,3 +47,6 @@ dokudoki:
     server: %mongodb_server%
     database: Sf2ffbp
     collection: boilerplate
+
+oauth:
+    config: dynamic_config

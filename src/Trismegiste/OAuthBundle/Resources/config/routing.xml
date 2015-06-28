@@ -4,20 +4,25 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
+    <!-- step 1 : choose provider -->
     <route id="trismegiste_oauth_connect" pattern="/connect">
     </route>
 
+    <!-- step 2 : redirect to provider with redirect_uri -->
     <route id="trismegiste_oauth_connect_with" pattern="/connect/{provider}">
     </route>
 
+    <!-- step 3 : dummy provider -->
+    <route id="trismegiste_oauth_dummyserver" pattern="/connect/oauth/authorize">
+        <default key="_controller">TrismegisteOAuthBundle:OAuthServer:authorize</default>
+    </route>
+
+    <!-- step 4 : virtual route catched by the listener -->
     <route id="trismegiste_oauth_check" pattern="/oauth_check/{provider}">
     </route>
 
+    <!-- step 5 : logout -->
     <route id="trismegiste_oauth_logout" pattern="/logout">
-    </route>
-
-    <route id="trismegiste_oauth_dummyserver" pattern="/connect/oauth/authorize">
-        <default key="_controller">TrismegisteOAuthBundle:OAuthServer:authorize</default>
     </route>
 
 </routes>

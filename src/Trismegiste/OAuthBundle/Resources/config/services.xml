@@ -28,7 +28,5 @@
                  public="false" abstract="true">
         </service>
 
-        <service id="dynamic_config" class="Trismegiste\FrontBundle\DependencyInjection\DynamicConfig"/>
-
     </services>
 </container>
