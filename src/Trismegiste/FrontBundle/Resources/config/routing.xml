@@ -4,10 +4,6 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="trismegiste_homepage" pattern="/">
-        <default key="_controller">TrismegisteFrontBundle:Default:index</default>
-    </route>
-    
     <route id="trismegiste_oauth_connect" pattern="/connect">
         <default key="_controller">TrismegisteFrontBundle:Default:connect</default>
     </route>
@@ -25,12 +21,16 @@
     <route id="trismegiste_oauth_dummyserver" pattern="/connect/oauth/authorize">
         <default key="_controller">TrismegisteFrontBundle:OAuthServer:authorize</default>
     </route>
+
+    <route id="trismegiste_homepage" pattern="/">
+        <default key="_controller">TrismegisteFrontBundle:Default:index</default>
+    </route>
     
     <route id="trismegiste_about" pattern="/about">
         <default key="_controller">TrismegisteFrontBundle:Default:about</default>
     </route>
     
-    <route id="admin_secure" pattern="/">
+    <route id="admin_secure" pattern="/admin">
         <default key="_controller">TrismegisteFrontBundle:Default:admin</default>
     </route>
 </routes>
