@@ -21,15 +21,15 @@ security:
             stateless: false
             anonymous: ~
             oauth: 
-                login_path:   trismegiste_connect
-                failure_path: trismegiste_connect
-                check_path:   trismegiste_logincheck
+                login_path:   trismegiste_oauth_connect
+                failure_path: trismegiste_oauth_connect
+                check_path:   trismegiste_oauth_check
                 remember_me:  true
             remember_me:
                 always_remember_me: false
                 key: %secret%
             logout:
-                path:   /logout
+                path:   trismegiste_oauth_logout
                 target: /
 
     access_control:

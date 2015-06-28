@@ -16,12 +16,15 @@ use Trismegiste\FrontBundle\Security\Token;
 class DummyBridge implements ThirdPartyAuthentication
 {
 
+    protected $loginCheck;
+
     /** @var UrlGeneratorInterface */
     protected $urlGenerator;
 
-    public function __construct(UrlGeneratorInterface $gen)
+    public function __construct($loginCheck, UrlGeneratorInterface $gen)
     {
         $this->urlGenerator = $gen;
+        $this->loginCheck = $loginCheck;
     }
 
     public function buildToken(Request $req)
@@ -31,10 +34,7 @@ class DummyBridge implements ThirdPartyAuthentication
 
     public function getAuthorizationUrl()
     {
-        $redirect = $this->urlGenerator
-                ->generate('trismegiste_logincheck', ['provider' => 'dummy'], UrlGeneratorInterface::ABSOLUTE_URL);
-
-        return $this->urlGenerator->generate('trismegiste_oauth_dummy', ['redirect' => $redirect]);
+        return $this->urlGenerator->generate('trismegiste_oauth_dummyserver', ['redirect' => $this->loginCheck]);
     }
 
     public function validateRequest(Request $req)

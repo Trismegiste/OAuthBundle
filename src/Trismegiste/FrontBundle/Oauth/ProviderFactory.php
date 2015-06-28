@@ -6,13 +6,16 @@
 
 namespace Trismegiste\FrontBundle\Oauth;
 
+use ArrayAccess;
+use League\OAuth1\Client\Server\Tumblr;
+use League\OAuth1\Client\Server\Twitter;
 use League\OAuth2\Client\Provider\Github;
 use League\OAuth2\Client\Provider\Google;
 use LogicException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use RuntimeException;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
-use League\OAuth1\Client\Server\Twitter;
-use League\OAuth1\Client\Server\Tumblr;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * ProviderFactory 
@@ -32,7 +35,7 @@ class ProviderFactory implements ProviderFactoryMethod
     /** var array */
     protected $providerConfig;
 
-    public function __construct(\ArrayAccess $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, \Symfony\Component\HttpFoundation\Session\SessionInterface $sess)
+    public function __construct(ArrayAccess $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess)
     {
         $this->urlGenerator = $gen;
         $this->csrf = $csrfService;
@@ -44,17 +47,18 @@ class ProviderFactory implements ProviderFactoryMethod
     public function create($providerKey)
     {
         if (!array_key_exists($providerKey, $this->providerConfig)) {
-            throw new \RuntimeException("$providerKey is not configured");
+            throw new RuntimeException("$providerKey is not configured");
         }
 
         $cfg = $this->providerConfig[$providerKey];
+        $callback = $this->generateLoginCheckUrl($providerKey);
 
         switch ($providerKey) {
             case 'github':
                 return new OAuth2ProviderBridge(new Github([
                     'clientId' => $cfg['public'],
                     'clientSecret' => $cfg['secret'],
-                    'redirectUri' => $this->generateLoginCheckUrl($providerKey),
+                    'redirectUri' => $callback,
                     'scopes' => [],
                         ]), $this->csrf);
                 break;
@@ -63,7 +67,7 @@ class ProviderFactory implements ProviderFactoryMethod
                 return new OAuth2ProviderBridge(new Google([
                     'clientId' => $cfg['public'],
                     'clientSecret' => $cfg['secret'],
-                    'redirectUri' => $this->generateLoginCheckUrl($providerKey),
+                    'redirectUri' => $callback,
                     'scopes' => ['profile'],
                         ]), $this->csrf);
                 break;
@@ -72,7 +76,7 @@ class ProviderFactory implements ProviderFactoryMethod
                 return new OAuth1ProviderBridge(new Twitter([
                     'identifier' => $cfg['public'],
                     'secret' => $cfg['secret'],
-                    'callback_uri' => $this->generateLoginCheckUrl($providerKey)
+                    'callback_uri' => $callback
                         ]), $this->session);
                 break;
 
@@ -80,12 +84,12 @@ class ProviderFactory implements ProviderFactoryMethod
                 return new OAuth1ProviderBridge(new Tumblr([
                     'identifier' => $cfg['public'],
                     'secret' => $cfg['secret'],
-                    'callback_uri' => $this->generateLoginCheckUrl($providerKey)
+                    'callback_uri' => $callback
                         ]), $this->session);
                 break;
 
             case 'dummy':
-                return new DummyBridge($this->urlGenerator);
+                return new DummyBridge($callback, $this->urlGenerator);
                 break;
 
             default:
@@ -96,7 +100,7 @@ class ProviderFactory implements ProviderFactoryMethod
     protected function generateLoginCheckUrl($providerKey)
     {
         return $this->urlGenerator
-                        ->generate('trismegiste_logincheck', [
+                        ->generate('trismegiste_oauth_check', [
                             'provider' => $providerKey
                                 ], UrlGeneratorInterface::ABSOLUTE_URL);
     }

@@ -1,9 +1,3 @@
 trismegiste_front:
     resource: "@TrismegisteFrontBundle/Resources/config/routing.xml"
     prefix:   /
-
-trismegiste_logincheck:
-    pattern: /login_check/{provider}
-
-trismegiste_logout:
-    pattern: /logout
