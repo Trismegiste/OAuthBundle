@@ -38,6 +38,7 @@ class ProviderFactory implements ProviderFactoryMethod
         $this->csrf = $csrfService;
         $this->session = $sess;
         $this->providerConfig = $config['oauth'];
+        $this->providerConfig['dummy'] = [];
     }
 
     public function create($providerKey)
@@ -82,6 +83,11 @@ class ProviderFactory implements ProviderFactoryMethod
                     'callback_uri' => $this->generateLoginCheckUrl($providerKey)
                         ]), $this->session);
                 break;
+
+            case 'dummy':
+                return new DummyBridge($this->urlGenerator);
+                break;
+
             default:
                 throw new LogicException("$providerKey is not supported");
         }

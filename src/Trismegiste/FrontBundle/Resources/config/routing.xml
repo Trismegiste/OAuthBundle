@@ -16,6 +16,10 @@
         <default key="_controller">TrismegisteFrontBundle:Default:connectWith</default>
     </route>
 
+    <route id="trismegiste_oauth_dummy" pattern="/connect/oauth/authorize">
+        <default key="_controller">TrismegisteFrontBundle:OAuthServer:authorize</default>
+    </route>
+    
     <route id="trismegiste_about" pattern="/about">
         <default key="_controller">TrismegisteFrontBundle:Default:about</default>
     </route>

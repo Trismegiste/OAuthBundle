@@ -15,4 +15,7 @@
 <br/>
 {{ url('trismegiste_logincheck',{provider:'tumblr'}) }}
 <a href="{{ path('connect_with', {provider:"tumblr"}) }}" class="btn-success">Login with tumblr</a>
+<br/>
+{{ url('trismegiste_logincheck',{provider:'dummy'}) }}
+<a href="{{ path('connect_with', {provider:"dummy"}) }}" class="btn-success">Login with dummy</a>
 {% endblock %}
