@@ -1,7 +1,7 @@
 <?php
 
 /*
- * connect-oauth
+ * OAuthBundle
  */
 
 namespace Trismegiste\OAuthBundle\DependencyInjection;
