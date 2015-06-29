@@ -17,9 +17,6 @@ class TrismegisteOAuthBundle extends Bundle
         $extension->addSecurityListenerFactory(new OauthSecurityFactory());
     }
 
-    /**
-     * KISS
-     */
     public function getContainerExtension()
     {
         return new DependencyInjection\TrismegisteOAuthExtension();

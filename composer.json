@@ -1,45 +1,12 @@
 {
-    "name": "trismegiste/sympony",
-    "description": "My fat-free \"Symfony Non-Standard Edition\" distribution",
+    "name": "trismegiste/oauthbundle",
+    "description": "OAuthBundle for iinano",
     "autoload": {
         "psr-0": { "": "src/" }
     },
     "require": {
-        "php": ">=5.3.3",
-        "symfony/symfony": "2.3.*",
-        "twig/extensions": "1.0.*",
-        "symfony/assetic-bundle": "2.3.*",
-        "symfony/monolog-bundle": "2.3.*",
-        "sensio/distribution-bundle": "2.3.*",
-        "trismegiste/dokudoki": "2.2.*",
-        "trismegiste/symfony-prelude": "1.0.*",
+        "php": ">=5.5",
         "league/oauth2-client": "0.12.*",
         "league/oauth1-client": "~1.0"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "Trismegiste\\Prelude\\Composer\\Script::installPlatform",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-        ],
-        "post-update-cmd": [
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-        ]
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "minimum-stability": "stable",
-    "extra": {
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
-        "branch-alias": {
-            "dev-master": "2.3-dev"
-        }
     }
 }
