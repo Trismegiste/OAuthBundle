@@ -17,7 +17,7 @@
         <default key="_controller">TrismegisteOAuthBundle:OAuthServer:authorize</default>
     </route>
 
-    <!-- step 4 : virtual route catched by the listener -->
+    <!-- step 4 : virtual route caught by the listener -->
     <route id="trismegiste_oauth_check" pattern="/oauth_check/{provider}">
     </route>
 
