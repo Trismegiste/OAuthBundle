@@ -1,8 +1,0 @@
-trismegiste_oauth:
-    resource: "@TrismegisteOAuthBundle/Resources/config/routing.xml"
-    prefix:   /
-
-trismegiste_front:
-    resource: "@TrismegisteFrontBundle/Resources/config/routing.xml"
-    prefix:   /
-    

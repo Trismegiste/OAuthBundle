@@ -1,5 +1,0 @@
-{% if app.user.username is defined %}
-<p class="navbar-text pull-right">
-    Logged in as <a href="{{ path('trismegiste_oauth_logout') }}" class="navbar-link">{{ app.user.username }}</a>
-</p>
-{% endif %}
