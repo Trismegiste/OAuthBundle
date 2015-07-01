@@ -22,9 +22,13 @@ class OauthProvider implements AuthenticationProviderInterface
     /** @var \Trismegiste\OAuthBundle\Security\OauthUserProviderInterface */
     protected $userProvider;
 
-    public function __construct(OauthUserProviderInterface $repository)
+    /** @var string */
+    protected $firewallName;
+
+    public function __construct(OauthUserProviderInterface $repository, $firewallName)
     {
         $this->userProvider = $repository;
+        $this->firewallName = $firewallName;
     }
 
     public function authenticate(TokenInterface $token)
@@ -45,7 +49,7 @@ class OauthProvider implements AuthenticationProviderInterface
             throw new AuthenticationServiceException('findByOauthId() must return a UserInterface.');
         }
 
-        $authenticatedToken = new Token($token->getProviderKey(), $token->getUserUniqueIdentifier(), $found->getRoles());
+        $authenticatedToken = new Token($this->firewallName, $token->getProviderKey(), $token->getUserUniqueIdentifier(), $found->getRoles());
         $authenticatedToken->setAttributes($token->getAttributes());
         $authenticatedToken->setUser($found);
 
@@ -54,7 +58,8 @@ class OauthProvider implements AuthenticationProviderInterface
 
     public function supports(TokenInterface $token)
     {
-        return $token instanceof Token;
+        var_dump($token->getFirewallName(), $this->firewallName);
+        return ($token instanceof Token) && ($token->getFirewallName() === $this->firewallName);
     }
 
 }

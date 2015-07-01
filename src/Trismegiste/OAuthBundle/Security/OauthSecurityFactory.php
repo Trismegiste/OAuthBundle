@@ -22,7 +22,8 @@ class OauthSecurityFactory extends AbstractFactory
         $provider = 'security.authentication.provider.oauth.' . $id;
         $container
                 ->setDefinition($provider, new DefinitionDecorator('oauth.security.authentication.provider'))
-                ->replaceArgument(0, new Reference($userProviderId));
+                ->replaceArgument(0, new Reference($userProviderId))
+                ->replaceArgument(1, $id);
 
         return $provider;
     }

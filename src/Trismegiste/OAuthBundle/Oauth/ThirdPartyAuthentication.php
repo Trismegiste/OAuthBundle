@@ -21,10 +21,10 @@ interface ThirdPartyAuthentication
     public function validateRequest(Request $req);
 
     /**
-     * 
+     *
      * @param \Symfony\Component\HttpFoundation\Request $req
-     * 
+     *
      * @return \Trismegiste\OAuthBundle\Security\Token
      */
-    public function buildToken(Request $req);
+    public function buildToken(Request $req, $firewallName);
 }

@@ -30,7 +30,7 @@ class OauthListener extends AbstractAuthenticationListener
 
     /**
      * Ctor
-     * 
+     *
      * @param SecurityContextInterface $securityContext
      * @param AuthenticationManagerInterface $authenticationManager
      * @param SessionAuthenticationStrategyInterface $sessionStrategy
@@ -64,7 +64,8 @@ class OauthListener extends AbstractAuthenticationListener
         $provider->validateRequest($request);
 
         try {
-            $identifiedToken = $provider->buildToken($request);
+            // note : providerKey is the name of the firewall
+            $identifiedToken = $provider->buildToken($request, $this->providerKey);
             return $this->authenticationManager->authenticate($identifiedToken);
         } catch (Exception $e) {
             throw new AuthenticationException("Failed to validate the oauth token");
@@ -78,7 +79,7 @@ class OauthListener extends AbstractAuthenticationListener
      * @param Request $request
      *
      * @throws AuthenticationException
-     * 
+     *
      * Note: Copy-pasted from HwiOAuthBundle
      */
     private function handleOAuthError(Request $request)
