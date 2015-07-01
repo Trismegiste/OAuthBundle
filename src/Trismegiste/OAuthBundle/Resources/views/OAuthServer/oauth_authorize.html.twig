@@ -1,6 +1,9 @@
 <html>
     <body>
         <h1>Dummy OAuth provider</h1>
-        <a href="{{ redirect }}">Redirect</a>
+        <form action="{{ redirect }}" method="GET">
+            <input type="text" name="uid"/>
+            <input type="submit" value="Redirect"/>
+        </form>
     </body>
 </html>

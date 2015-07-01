@@ -29,7 +29,8 @@ class DummyBridge implements ThirdPartyAuthentication
 
     public function buildToken(Request $req)
     {
-        return new Token('dummy', rand(), [self::IDENTIFIED]);
+        $uid = $req->query->get('uid');
+        return new Token('dummy', $uid, [self::IDENTIFIED]);
     }
 
     public function getAuthorizationUrl()
@@ -39,7 +40,7 @@ class DummyBridge implements ThirdPartyAuthentication
 
     public function validateRequest(Request $req)
     {
-        // do nothing   
+        // do nothing
     }
 
 }
