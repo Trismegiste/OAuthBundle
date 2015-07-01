@@ -14,18 +14,15 @@ use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 class Token extends AbstractToken
 {
 
-    /** @var string */
-    private $uniqueId;
-
-    /** @var string */
-    private $providerKey;
+    const UNIQUE_ID_ATTR = 'uniqueId';
+    const PROVIDER_KEY_ATTR = 'providerKey';
 
     public function __construct($providerKey, $uid, array $role = [])
     {
         parent::__construct($role);
         $this->setAuthenticated(count($role) > 0);
-        $this->uniqueId = $uid;
-        $this->providerKey = $providerKey;
+        $this->setAttribute(self::UNIQUE_ID_ATTR, $uid);
+        $this->setAttribute(self::PROVIDER_KEY_ATTR, $providerKey);
     }
 
     public function getCredentials()
@@ -35,12 +32,12 @@ class Token extends AbstractToken
 
     public function getUserUniqueIdentifier()
     {
-        return $this->uniqueId;
+        return $this->getAttribute(self::UNIQUE_ID_ATTR);
     }
 
     public function getProviderKey()
     {
-        return $this->providerKey;
+        return $this->getAttribute(self::PROVIDER_KEY_ATTR);
     }
 
 }
