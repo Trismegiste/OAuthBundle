@@ -6,7 +6,6 @@
 
 namespace Trismegiste\OAuthBundle\Oauth;
 
-use ArrayAccess;
 use League\OAuth1\Client\Server\Tumblr;
 use League\OAuth1\Client\Server\Twitter;
 use League\OAuth2\Client\Provider\Github;
@@ -16,6 +15,7 @@ use RuntimeException;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Trismegiste\OAuthBundle\DependencyInjection\ProviderConfigInterface;
 
 /**
  * ProviderFactory
@@ -37,12 +37,12 @@ class ProviderFactory implements ProviderFactoryMethod
     /** var array */
     protected $providerConfig;
 
-    public function __construct(ArrayAccess $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess, $debug = false)
+    public function __construct(ProviderConfigInterface $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess, $debug = false)
     {
         $this->urlGenerator = $gen;
         $this->csrf = $csrfService;
         $this->session = $sess;
-        $this->providerConfig = $config['oauth'];
+        $this->providerConfig = $config->all();
         if ($debug) {
             $this->providerConfig[self::DUMMY_PROVIDER] = [];
         }
