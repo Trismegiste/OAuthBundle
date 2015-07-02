@@ -58,7 +58,6 @@ class OauthProvider implements AuthenticationProviderInterface
 
     public function supports(TokenInterface $token)
     {
-        var_dump($token->getFirewallName(), $this->firewallName);
         return ($token instanceof Token) && ($token->getFirewallName() === $this->firewallName);
     }
 
