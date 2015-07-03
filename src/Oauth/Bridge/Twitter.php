@@ -14,9 +14,9 @@ use Trismegiste\OAuthBundle\Security\Token;
 use Trismegiste\OAuthBundle\Oauth\ThirdPartyAuthentication;
 
 /**
- * OAuth1ProviderBridge is a bridge over the OAuth1 provider Server
+ * Twitter is a bridge over the Twitter OAuth1 provider from league/oauth1-client
  */
-class OAuth1ProviderBridge implements ThirdPartyAuthentication
+class Twitter implements ThirdPartyAuthentication
 {
 
     const TEMP_CRED = 'temporary_credentials';
