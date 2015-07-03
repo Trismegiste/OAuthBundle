@@ -2,7 +2,7 @@
     "name": "trismegiste/oauthbundle",
     "description": "OAuthBundle for iinano",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": { "Trismegiste\\OAuthBundle\\": "src/" }
     },
     "require": {
         "php": ">=5.5",
