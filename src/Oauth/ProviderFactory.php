@@ -63,7 +63,7 @@ class ProviderFactory implements ProviderFactoryMethod
                 break;
 
             case self::DUMMY_PROVIDER:
-                return new DummyBridge($callback, $this->urlGenerator);
+                return new Bridge\Dummy($callback, $this->urlGenerator);
                 break;
 
             default:
