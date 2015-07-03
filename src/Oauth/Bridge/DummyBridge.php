@@ -9,6 +9,7 @@ namespace Trismegiste\OAuthBundle\Oauth\Bridge;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Trismegiste\OAuthBundle\Security\Token;
+use Trismegiste\OAuthBundle\Oauth\ThirdPartyAuthentication;
 
 /**
  * Dummy is a dummy oauth bridge

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Trismegiste\OAuthBundle\Security\Token;
+use Trismegiste\OAuthBundle\Oauth\ThirdPartyAuthentication;
 
 /**
  * OAuth1ProviderBridge is a bridge over the OAuth1 provider Server

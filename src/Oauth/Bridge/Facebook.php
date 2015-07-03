@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Trismegiste\OAuthBundle\Security\Token;
+use Trismegiste\OAuthBundle\Oauth\ThirdPartyAuthentication;
 
 /**
  * Facebook is a bridge to enapsulate Facebook Provider from OAuth2-client
