@@ -27,7 +27,10 @@ class Twitter implements ThirdPartyAuthentication
     /** @var SessionInterface */
     protected $session;
 
-    public function __construct($client, $secret, $callback, SessionInterface $sess)
+    /** @var \Psr\Log\LoggerInterface */
+    protected $logger;
+
+    public function __construct($client, $secret, $callback, SessionInterface $sess, \Psr\Log\LoggerInterface $logger)
     {
         $this->provider = new LeagueTwitter([
             'identifier' => $client,
@@ -35,6 +38,7 @@ class Twitter implements ThirdPartyAuthentication
             'callback_uri' => $callback
         ]);
         $this->session = $sess;
+        $this->logger = $logger;
     }
 
     public function buildToken(Request $req, $firewallName)
@@ -59,6 +63,7 @@ class Twitter implements ThirdPartyAuthentication
 
         $internToken = new Token($firewallName, $providerKey, $userDetails->uid, [self::IDENTIFIED]);
         $internToken->setAttribute('nickname', $userDetails->nickname);
+        $this->logger->debug('twitter', iterator_to_array($userDetails->getIterator()));
 
         return $internToken;
     }

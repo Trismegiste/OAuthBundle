@@ -7,11 +7,15 @@
 namespace Trismegiste\OAuthBundle\Oauth;
 
 use LogicException;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Trismegiste\OAuthBundle\DependencyInjection\ProviderConfigInterface;
+use Trismegiste\OAuthBundle\Oauth\Bridge\Dummy;
+use Trismegiste\OAuthBundle\Oauth\Bridge\Facebook;
+use Trismegiste\OAuthBundle\Oauth\Bridge\Twitter;
 
 /**
  * ProviderFactory
@@ -33,12 +37,16 @@ class ProviderFactory implements ProviderFactoryMethod
     /** var array */
     protected $providerConfig;
 
-    public function __construct(ProviderConfigInterface $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess, $debug = false)
+    /** @var LoggerInterface */
+    protected $logger;
+
+    public function __construct(ProviderConfigInterface $config, UrlGeneratorInterface $gen, CsrfProviderInterface $csrfService, SessionInterface $sess, LoggerInterface $logger, $debug = false)
     {
         $this->urlGenerator = $gen;
         $this->csrf = $csrfService;
         $this->session = $sess;
         $this->providerConfig = $config->all();
+        $this->logger = $logger;
         if ($debug) {
             $this->providerConfig[self::DUMMY_PROVIDER] = [];
         }
@@ -55,15 +63,15 @@ class ProviderFactory implements ProviderFactoryMethod
 
         switch ($providerKey) {
             case 'facebook':
-                return new Bridge\Facebook($cfg['client_id'], $cfg['secret_id'], $callback, $this->csrf);
+                return new Facebook($cfg['client_id'], $cfg['secret_id'], $callback, $this->csrf, $this->logger);
                 break;
 
             case 'twitter':
-                return new Bridge\Twitter($cfg['client_id'], $cfg['secret_id'], $callback, $this->session);
+                return new Twitter($cfg['client_id'], $cfg['secret_id'], $callback, $this->session, $this->logger);
                 break;
 
             case self::DUMMY_PROVIDER:
-                return new Bridge\Dummy($callback, $this->urlGenerator);
+                return new Dummy($callback, $this->urlGenerator);
                 break;
 
             default:
