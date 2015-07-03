@@ -46,7 +46,7 @@ class OAuth2ProviderBridge implements ThirdPartyAuthentication
         }
     }
 
-    public function buildToken(Request $req)
+    public function buildToken(Request $req, $firewallName)
     {
         $token = $this->provider->getAccessToken('authorization_code', [
             'code' => $req->query->get('code')
@@ -56,7 +56,7 @@ class OAuth2ProviderBridge implements ThirdPartyAuthentication
         // We got an access token, let's now get the user's details
         /** @var \League\OAuth2\Client\Entity\User */
         $userDetails = $this->provider->getUserDetails($token);
-        $internToken = new Token($providerKey, $userDetails->uid, [self::IDENTIFIED]);
+        $internToken = new Token($firewallName, $providerKey, $userDetails->uid, [self::IDENTIFIED]);
         $internToken->setAttribute('nickname', $userDetails->nickname);
 
         return $internToken;

@@ -9,7 +9,7 @@ namespace Trismegiste\OAuthBundle\Oauth;
 use League\OAuth1\Client\Server\Tumblr;
 use League\OAuth1\Client\Server\Twitter;
 use League\OAuth2\Client\Provider\Github;
-use League\OAuth2\Client\Provider\Google;
+use League\OAuth2\Client\Provider\Facebook;
 use LogicException;
 use RuntimeException;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
@@ -60,34 +60,34 @@ class ProviderFactory implements ProviderFactoryMethod
         switch ($providerKey) {
             case 'github':
                 return new OAuth2ProviderBridge(new Github([
-                    'clientId' => $cfg['public'],
-                    'clientSecret' => $cfg['secret'],
+                    'clientId' => $cfg['client_id'],
+                    'clientSecret' => $cfg['secret_id'],
                     'redirectUri' => $callback,
                     'scopes' => [],
                         ]), $this->csrf);
                 break;
 
-            case 'google':
-                return new OAuth2ProviderBridge(new Google([
-                    'clientId' => $cfg['public'],
-                    'clientSecret' => $cfg['secret'],
+            case 'facebook':
+                return new OAuth2ProviderBridge(new Facebook([
+                    'clientId' => $cfg['client_id'],
+                    'clientSecret' => $cfg['secret_id'],
                     'redirectUri' => $callback,
-                    'scopes' => ['profile'],
+                    'scopes' => ['public_profile'],
                         ]), $this->csrf);
                 break;
 
             case 'twitter':
                 return new OAuth1ProviderBridge(new Twitter([
-                    'identifier' => $cfg['public'],
-                    'secret' => $cfg['secret'],
+                    'identifier' => $cfg['client_id'],
+                    'secret' => $cfg['secret_id'],
                     'callback_uri' => $callback
                         ]), $this->session);
                 break;
 
             case 'tumblr':
                 return new OAuth1ProviderBridge(new Tumblr([
-                    'identifier' => $cfg['public'],
-                    'secret' => $cfg['secret'],
+                    'identifier' => $cfg['client_id'],
+                    'secret' => $cfg['secret_id'],
                     'callback_uri' => $callback
                         ]), $this->session);
                 break;

@@ -32,7 +32,7 @@ class OAuth1ProviderBridge implements ThirdPartyAuthentication
         $this->session = $sess;
     }
 
-    public function buildToken(Request $req)
+    public function buildToken(Request $req, $firewallName)
     {
         $providerKey = $req->attributes->get('provider');
         // Retrieve the temporary credentials from step 2
@@ -52,7 +52,7 @@ class OAuth1ProviderBridge implements ThirdPartyAuthentication
         /** @var \League\OAuth1\Client\Entity\User */
         $userDetails = $this->provider->getUserDetails($tokenCredentials);
 
-        $internToken = new Token($providerKey, $userDetails->uid, [self::IDENTIFIED]);
+        $internToken = new Token($firewallName, $providerKey, $userDetails->uid, [self::IDENTIFIED]);
         $internToken->setAttribute('nickname', $userDetails->nickname);
 
         return $internToken;
