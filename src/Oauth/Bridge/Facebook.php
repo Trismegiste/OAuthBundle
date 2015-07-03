@@ -4,50 +4,50 @@
  * OAuthBundle
  */
 
-namespace Trismegiste\OAuthBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth\Bridge;
 
-use League\OAuth2\Client\Provider\AbstractProvider;
+use League\OAuth2\Client\Provider\Facebook as LeagueFacebook;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Trismegiste\OAuthBundle\Security\Token;
 
 /**
- * OAuth2ProviderBridge is a bridge to enapsulate Provider from OAuth2-client
+ * Facebook is a bridge to enapsulate Facebook Provider from OAuth2-client
  */
-class OAuth2ProviderBridge implements ThirdPartyAuthentication
-{
+class Facebook implements ThirdPartyAuthentication {
 
     const STATE_KEY = 'state';
 
-    /** @var AbstractProvider */
+    /** @var LeagueFacebook */
     protected $provider;
 
     /** @var CsrfProviderInterface */
     protected $csrf;
 
-    public function __construct(AbstractProvider $pro, CsrfProviderInterface $csrfService)
-    {
-        $this->provider = $pro;
+    public function __construct($client, $secret, $callback, CsrfProviderInterface $csrfService) {
+        $this->provider = new LeagueFacebook([
+            'clientId' => $client,
+            'clientSecret' => $secret,
+            'redirectUri' => $callback,
+            'scopes' => ['public_profile'],
+        ]);
         $this->csrf = $csrfService;
     }
 
-    public function getAuthorizationUrl()
-    {
+    public function getAuthorizationUrl() {
         $options = [self::STATE_KEY => $this->csrf->generateCsrfToken(__CLASS__)];
 
         return $this->provider->getAuthorizationUrl($options);
     }
 
-    public function validateRequest(Request $req)
-    {
+    public function validateRequest(Request $req) {
         if (!$this->csrf->isCsrfTokenValid(__CLASS__, $req->query->get(self::STATE_KEY, ''))) {
             throw new AuthenticationException("Invalid state");
         }
     }
 
-    public function buildToken(Request $req, $firewallName)
-    {
+    public function buildToken(Request $req, $firewallName) {
         $token = $this->provider->getAccessToken('authorization_code', [
             'code' => $req->query->get('code')
         ]);

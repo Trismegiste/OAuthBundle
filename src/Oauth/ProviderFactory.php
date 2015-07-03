@@ -6,10 +6,6 @@
 
 namespace Trismegiste\OAuthBundle\Oauth;
 
-use League\OAuth1\Client\Server\Tumblr;
-use League\OAuth1\Client\Server\Twitter;
-use League\OAuth2\Client\Provider\Github;
-use League\OAuth2\Client\Provider\Facebook;
 use LogicException;
 use RuntimeException;
 use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
@@ -58,38 +54,12 @@ class ProviderFactory implements ProviderFactoryMethod
         $callback = $this->generateLoginCheckUrl($providerKey);
 
         switch ($providerKey) {
-            case 'github':
-                return new OAuth2ProviderBridge(new Github([
-                    'clientId' => $cfg['client_id'],
-                    'clientSecret' => $cfg['secret_id'],
-                    'redirectUri' => $callback,
-                    'scopes' => [],
-                        ]), $this->csrf);
-                break;
-
             case 'facebook':
-                return new OAuth2ProviderBridge(new Facebook([
-                    'clientId' => $cfg['client_id'],
-                    'clientSecret' => $cfg['secret_id'],
-                    'redirectUri' => $callback,
-                    'scopes' => ['public_profile'],
-                        ]), $this->csrf);
+                return new Bridge\Facebook($cfg['client_id'], $cfg['secret_id'], $callback, $this->csrf);
                 break;
 
             case 'twitter':
-                return new OAuth1ProviderBridge(new Twitter([
-                    'identifier' => $cfg['client_id'],
-                    'secret' => $cfg['secret_id'],
-                    'callback_uri' => $callback
-                        ]), $this->session);
-                break;
-
-            case 'tumblr':
-                return new OAuth1ProviderBridge(new Tumblr([
-                    'identifier' => $cfg['client_id'],
-                    'secret' => $cfg['secret_id'],
-                    'callback_uri' => $callback
-                        ]), $this->session);
+                return new Bridge\Twitter($cfg['client_id'], $cfg['secret_id'], $callback, $this->session);
                 break;
 
             case self::DUMMY_PROVIDER:

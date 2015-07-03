@@ -4,9 +4,9 @@
  * OAuthBundle
  */
 
-namespace Trismegiste\OAuthBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth\Bridge;
 
-use League\OAuth1\Client\Server\Server;
+use League\OAuth1\Client\Server\Twitter as LeagueTwitter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -20,15 +20,19 @@ class OAuth1ProviderBridge implements ThirdPartyAuthentication
 
     const TEMP_CRED = 'temporary_credentials';
 
-    /** @var Server */
+    /** @var LeagueTwitter */
     protected $provider;
 
     /** @var SessionInterface */
     protected $session;
 
-    public function __construct(Server $provider, SessionInterface $sess)
+    public function __construct($client, $secret, $callback, SessionInterface $sess)
     {
-        $this->provider = $provider;
+        $this->provider = new LeagueTwitter([
+            'identifier' => $client,
+            'secret' => $secret,
+            'callback_uri' => $callback
+        ]);
         $this->session = $sess;
     }
 

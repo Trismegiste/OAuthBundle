@@ -4,16 +4,16 @@
  * OAuthBundle
  */
 
-namespace Trismegiste\OAuthBundle\Oauth;
+namespace Trismegiste\OAuthBundle\Oauth\Bridge;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Trismegiste\OAuthBundle\Security\Token;
 
 /**
- * DummyBridge is a dummy oauth bridge
+ * Dummy is a dummy oauth bridge
  */
-class DummyBridge implements ThirdPartyAuthentication
+class Dummy implements ThirdPartyAuthentication
 {
 
     protected $loginCheck;
