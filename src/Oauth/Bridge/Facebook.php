@@ -69,7 +69,7 @@ class Facebook implements ThirdPartyAuthentication
         $userDetails = $this->provider->getUserDetails($token);
         $internToken = new Token($firewallName, $providerKey, $userDetails->uid, [self::IDENTIFIED]);
         $internToken->setAttribute('nickname', $userDetails->name);
-        $internToken->setAttribute('gender', $userDetails->gender);
+        $internToken->setAttribute('gender', ($userDetails->gender = 'male') ? 'xy' : 'xx' );
         $this->logger->debug('facebook', $userDetails->getArrayCopy());
 
         return $internToken;

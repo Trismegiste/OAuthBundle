@@ -33,6 +33,9 @@ class Dummy implements ThirdPartyAuthentication
         $uid = $req->query->get('uid');
         $token = new Token($firewallName, 'dummy', $uid, [self::IDENTIFIED]);
         $token->setAttribute('nickname', $req->query->get('nickname'));
+        if (!empty($req->query->get('gender'))) {
+            $token->setAttribute('gender', $req->query->get('gender'));
+        }
 
         return $token;
     }
