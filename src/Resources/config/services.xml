@@ -9,7 +9,6 @@
             <argument type="service" id="form.csrf_provider"/>
             <argument type="service" id="session"/>
             <argument type="service" id="logger"/>
-            <argument>%kernel.debug%</argument>
         </service>
 
         <service id="oauth.security.authentication.provider"

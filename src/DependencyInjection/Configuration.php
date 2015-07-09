@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
                         ->isRequired()
                         ->cannotBeEmpty()
                     ->end()
+                    ->scalarNode('dummytest')->defaultValue(false)->end()
                 ->end();
 
         return $treeBuilder;

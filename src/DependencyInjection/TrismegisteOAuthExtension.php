@@ -29,6 +29,7 @@ class TrismegisteOAuthExtension extends Extension
 
         $def = $container->getDefinition('oauth.provider.factory');
         $def->replaceArgument(0, new Reference($config['config']));
+        $def->addArgument($config['dummytest']);
     }
 
     public function getAlias()
