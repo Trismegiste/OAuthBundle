@@ -17,6 +17,14 @@ use Symfony\Component\DependencyInjection\Reference;
 class OauthSecurityFactory extends AbstractFactory
 {
 
+    public function __construct()
+    {
+        $this->options['check_path'] = 'trismegiste_oauth_check';
+        $this->defaultSuccessHandlerOptions['login_path'] = 'trismegiste_oauth_connect';
+        $this->defaultFailureHandlerOptions['failure_path'] = 'trismegiste_oauth_connect';
+        $this->defaultFailureHandlerOptions['login_path'] = 'trismegiste_oauth_connect';
+    }
+
     protected function createAuthProvider(ContainerBuilder $container, $id, $config, $userProviderId)
     {
         $provider = 'security.authentication.provider.oauth.' . $id;
