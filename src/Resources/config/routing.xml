@@ -13,6 +13,7 @@
     <route id="trismegiste_oauth_connect_with" pattern="/connect/{provider}">
         <default key="_controller">TrismegisteOAuthBundle:Authorize:connectWith</default>
         <requirement key="_method">GET</requirement>
+        <requirement key="provider">[a-z]+</requirement>
     </route>
 
     <!-- step 3 : dummy provider -->
@@ -24,6 +25,7 @@
     <!-- step 4 : virtual route caught by the listener -->
     <route id="trismegiste_oauth_check" pattern="/oauth_check/{provider}">
         <requirement key="_method">GET</requirement>
+        <requirement key="provider">[a-z]+</requirement>
     </route>
 
     <!-- step 5 : logout -->
