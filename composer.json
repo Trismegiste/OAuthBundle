@@ -6,7 +6,7 @@
     },
     "require": {
         "php": ">=5.5",
-        "league/oauth2-client": "0.12.*",
+        "league/oauth2-client": "~1.4",
         "league/oauth1-client": "~1.0"
     }
 }
