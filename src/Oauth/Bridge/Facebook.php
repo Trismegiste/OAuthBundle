@@ -37,8 +37,8 @@ class Facebook implements ThirdPartyAuthentication
             'clientId' => $client,
             'clientSecret' => $secret,
             'redirectUri' => $callback,
-            'scopes' => ['public_profile'],
-        ]);
+            'graphApiVersion'   => 'v2.10'
+            ]);
         $this->csrf = $csrfService;
         $this->logger = $logger;
     }
@@ -65,12 +65,12 @@ class Facebook implements ThirdPartyAuthentication
         $providerKey = $req->attributes->get('provider');
 
         // We got an access token, let's now get the user's details
-        /** @var \League\OAuth2\Client\Entity\User */
-        $userDetails = $this->provider->getUserDetails($token);
-        $internToken = new Token($firewallName, $providerKey, $userDetails->uid, [self::IDENTIFIED]);
-        $internToken->setAttribute('nickname', $userDetails->name);
-        $internToken->setAttribute('gender', ($userDetails->gender = 'male') ? 'xy' : 'xx' );
-        $this->logger->debug('facebook', $userDetails->getArrayCopy());
+        /** @var \League\OAuth2\Client\Provider\FacebookUser */
+        $userDetails = $this->provider->getResourceOwner($token);
+        $internToken = new Token($firewallName, $providerKey, $userDetails->getId(), [self::IDENTIFIED]);
+        $internToken->setAttribute('nickname', $userDetails->getName());
+        $internToken->setAttribute('gender', ($userDetails->getGender() == 'male') ? 'xy' : 'xx' );
+        $this->logger->debug('facebook', $userDetails->toArray());
 
         return $internToken;
     }
